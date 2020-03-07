@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title></title>
+    <script type="text/javascript" src="https://miro.com/app/static/sdk.1.1.js"></script>
+    <script type="text/javascript" src="dicemaster.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="diceButton" class="scrollable-container">
+        <span id="diceZero"></span>
+        <script>
+        //Auto Load list de dés
+        document.body.onload = diceButton;
+
+        //List des dés
+        const dice = ['1d4', '2d4', '3d4', '4d4', '1d6', '2d6', '3d6', '4d6', '1d8', '2d8', '3d8', '4d8', '1d10', '2d10', '3d10', '4d10', '1d12', '2d12', '3d12', '4d12', '1d20', '2d20', '3d20', '4d20', '1d100', '2d100', '3d100', '4d100']
+
+        function addButton (value) {
+            // Crée un nouvel élément
+            const button = document.createElement('button')
+            // Reference de l'élement avant lequel on insère
+            const currentDiv = document.getElementById('diceZero')
+            // Reference element parent
+            const parentDiv = currentDiv.parentNode
+            // Reference Container
+            const divContainer = document.getElementById("diceButton")
+            const classDice = 'd' + value
+
+            // Elements du bouton
+            //const textContent = document.createTextNode(value)
+            button.id = value
+            button.classList = `dice-button ${classDice}`
+
+            // Elements du bouton enfant de bouton
+            //button.appendChild(textContent)
+            // Bouton enfant du Container
+            divContainer.appendChild(button)
+            
+            // Insertion du bouton
+            parentDiv.insertBefore(button, currentDiv)
+        }
+
+        function diceButton() {
+            for (let i = 0; i < dice.length; i++) {
+            const diceValue = dice[i]
+            addButton(diceValue)
+            document.getElementById(diceValue)
+                .addEventListener("click", () => arrayDiceValue(diceValue))
+            }
+        }    
+        </script>
+    </div>
+</body>
+</html>
